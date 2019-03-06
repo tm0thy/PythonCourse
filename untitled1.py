@@ -5,7 +5,7 @@ Created on Tue Mar  5 16:10:09 2019
 @author: Tymek
 """
 
-from math import factorial
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -24,26 +24,40 @@ print('#2')
 
 
 a=int(input('Choose a number:'))
-print('factorial:',factorial(a))
+
+def fact(number):
+    result=1
+    for i in range(number):
+        result*=i+1
+    return result
+    
+print('factorial:',fact(a))
 
 print('#3')
 
 array=list()
+index=[]
 
-number=input('Number of elements:')
+number=int(input('Number of elements:'))
 print('enter numbers:')
-for i in range(int(number)):
+for i in range(number):
     n=input()
     array.append(int(n))
     
-lowest=array[0]
-for i in range(int(number)):
-    if array[i]< lowest:
-        lowest=array[i]
-index=[i for i, j in enumerate(array) if j==lowest]
+def lowest(tab):
+    low=tab[0]
+    index=[]
+    for i in tab:
+        if i<low:
+            low=i
+    for i in range(len(tab)):
+        if low==tab[i]:
+            index.append(i)
+    return low,index
 
-print('lowest number/s: ', lowest)
-print('index of this number/s: ',index)
+
+print('lowest number/s: ', lowest(array)[0])
+print('index of this number/s: ', lowest(array)[1])
 
 print('#4')
       
@@ -56,7 +70,7 @@ if start==end:
         end=int(input('end:'))
 
 X=np.linspace(start,end,1000)
-Y=4*np.sin(X/2)
+Y=np.cos(X) * np.exp(-(X/2.0)**2)
 
 plt.plot(X,Y)
 plt.show()
